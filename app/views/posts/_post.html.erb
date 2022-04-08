@@ -5,5 +5,11 @@
       <small>- <%= time_ago_in_words post.created_at %> ago</small>
     </h5>
     <div class="card-text lead mb-2"><%= post.body %></div>
+      <% emojies = ["😀", "😭", "👍", "👎"] %>
+      <% emojies.each do |emoji| %>
+        <%= link_to "#", data: {reflex: "click->Posts#react", id: post.id, emoji: emoji} do %>
+          <%= emoji %> (<%= tag.span post.reactions.where(emoji: emoji).size, id: "post-#{post.id}-#{emoji}" %>)
+        <% end %>
+      <% end %>
   </div>
 </div>
